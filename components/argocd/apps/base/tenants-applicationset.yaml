@@ -8,19 +8,19 @@ metadata:
     argocd.argoproj.io/sync-options: Prune=false
 spec:
   generators:
-  - git:
-      repoURL: 'https://github.com/redhat-ai-services/ai-accelerator.git'
-      revision: main
-      directories:
-      - path: tenants/*/*/overlays/patch-me-see-overlay
+    - git:
+        repoURL: "https://github.com:traceherrell/ai-accelerator.git"
+        revision: main
+        directories:
+          - path: tenants/*/*/overlays/patch-me-see-overlay
   template:
     metadata:
-      name: '{{path[1]}}-{{path[2]}}'
+      name: "{{path[1]}}-{{path[2]}}"
       annotations:
         argocd.argoproj.io/compare-options: IgnoreExtraneous
         argocd.argoproj.io/sync-options: Prune=false
       labels:
-        tenant: '{{path[1]}}'
+        tenant: "{{path[1]}}"
     spec:
       project: tenants
       syncPolicy:
@@ -36,7 +36,7 @@ spec:
       source:
         repoURL: patch-me-see-clusters-overlays
         targetRevision: patch-me-see-clusters-overlays
-        path: '{{path}}'
+        path: "{{path}}"
       destination:
         server: https://kubernetes.default.svc
       ignoreDifferences:
